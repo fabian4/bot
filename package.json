@@ -1,0 +1,21 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "a chatbot based on wechaty",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --loader=ts-node/esm main.ts"
+  },
+  "author": "fabian",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "eslint": "^8.1.0",
+    "qrcode-terminal": "^0.12.0",
+    "wechaty": "^0.68.1",
+    "wechaty-puppet-padlocal": "^0.4.2"
+  },
+  "devDependencies": {
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  }
+}
