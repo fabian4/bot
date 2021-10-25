@@ -40,7 +40,7 @@ async function onLogout(user: Contact, reason: string) {
     log.info("ChatBot", `${user} logout, reason: ${reason}`);
 }
 
-async function onError(error) {
+async function onError(error: Error) {
     log.error("ChatBot", 'on error: ', error.stack);
 }
 
