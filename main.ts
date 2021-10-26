@@ -45,9 +45,9 @@ async function onError(error: Error) {
 }
 
 async function onMessage(msg: Message) {
-    log.info("ChatBot", `on message: ${msg.toString()}`);
-    // ding-dong bot
-    if (msg.to()?.self() && msg.text().indexOf("ding") !== -1) {
-        await msg.talker().say(msg.text().replace("ding", "dong"));
+    if (msg.room()) {
+        console.log(`Room: ${await msg.room()!.topic()} Contact: ${msg.talker()!.name()} Text: ${msg.text()}`)
+    } else {
+        console.log(`Contact: ${msg.talker()!.name()} Text: ${msg.text()}`)
     }
 }
