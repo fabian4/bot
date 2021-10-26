@@ -1,11 +1,12 @@
 import * as tencentcloud from "tencentcloud-sdk-nodejs"
+import botConfig from "../config";
 
 const NlpClient = tencentcloud.nlp.v20190408.Client;
 
 const clientConfig = {
     credential: {
-        secretId: "AKIDvfBRQAdssc5HDtIRL0OVMwFH7i25sPfe",
-        secretKey: "jDRO4UdV6RWLs89sKVQ5TbSP5UdW9VaO",
+        secretId: botConfig.TENCENT_SECRETID,
+        secretKey: botConfig.TENCENT_SECRETKEY,
     },
     region: "ap-guangzhou",
     profile: {
