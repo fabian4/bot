@@ -16,21 +16,3 @@ const clientConfig = {
 };
 
 export const client = new NlpClient(clientConfig);
-
-// export default function TencentChat(msg: string): string{
-//     const params = {
-//         "Query": msg
-//     };
-//     let reply: string = "";
-//     client.ChatBot(params).then(
-//         (data) => {
-//             console.log(data)
-//             reply = data.Reply!.toString();
-//         }
-//         // (err) => {
-//         //     console.error("error", err);
-//         //     return "something went wrong..."
-//         // }
-//     );
-//     return reply
-// }
