@@ -1,5 +1,5 @@
 import {PuppetPadlocal} from "wechaty-puppet-padlocal";
-import {log, Wechaty} from 'wechaty';
+import {Contact, log, Wechaty} from 'wechaty';
 import config from "./config";
 import onScan from "./listener/onScan";
 import onLogout from "./listener/onLogout";
@@ -11,7 +11,7 @@ const puppet = new PuppetPadlocal({
     token: config.WECHATY_PUPPET_SERVICE_TOKEN
 })
 
-const bot = new Wechaty({
+export const bot = new Wechaty({
     name: config.BotName,
     puppet,
 })
