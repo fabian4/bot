@@ -1,18 +1,18 @@
 import {PuppetPadlocal} from "wechaty-puppet-padlocal";
-import {Contact, log, Wechaty} from 'wechaty';
-import config from "./config";
+import {log, Wechaty} from 'wechaty';
 import onScan from "./listener/onScan";
 import onLogout from "./listener/onLogout";
 import onLogin from "./listener/onLogin";
 import onMessage from "./listener/onMessage";
 import onError from "./listener/onError";
+import botConfig from "./config";
 
 const puppet = new PuppetPadlocal({
-    token: config.WECHATY_PUPPET_SERVICE_TOKEN
+    token: botConfig.WECHATY_PUPPET_SERVICE_TOKEN
 })
 
 export const bot = new Wechaty({
-    name: config.BotName,
+    name: botConfig.BotName,
     puppet,
 })
     .on("scan", onScan)
@@ -22,5 +22,5 @@ export const bot = new Wechaty({
     .on("error", onError)
 
 bot.start().then(() => {
-    log.info("ChatBot", "started.");
+    log.info(botConfig.BotName, "started.");
 });
