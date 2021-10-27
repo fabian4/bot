@@ -1,5 +1,5 @@
 # ChatBot —— a chat bot based on wechaty🚀🚀🚀
-## 一、📌📌📌实现功能
+## 一、实现功能
 1. admin微信账号的线上配置策略调整
 2. 接入腾讯闲聊实现智能回复
 3. 实现谁是卧底的群聊玩法，支持多群聊的进行
@@ -32,7 +32,7 @@
 └─util
     └─ TencentChat.ts // 腾讯闲聊
 ~~~
-## 四、⭐ 配置项
+## 四、配置项
 ~~~typescript
 export const botConfig = {
     BotName: "ChatBot",
