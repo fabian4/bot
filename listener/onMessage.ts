@@ -1,12 +1,13 @@
-import {log, Message} from "wechaty";
+import {log, Message, Room} from "wechaty";
 import {client} from "../util/TencentChat";
 import {ContactType} from "wechaty-puppet";
 import botConfig from "../config";
-import WhoIsTreater from "../game/WhoIsTreater";
+import {bot} from "../main";
+import start from "../game/WhoIsTreater";
 
 const config = {
     isGame: true,
-    isAutoChat: false
+    isAutoChat: true
 }
 
 export default async function onMessage(msg: Message) {
@@ -21,24 +22,27 @@ export default async function onMessage(msg: Message) {
     WhoIsTreater(config.isGame, msg)
 }
 
-function changeConfig(msg: Message){
-    if(msg.talker().id === botConfig.adminId){
-        if(msg.text() === "config"){
+function changeConfig(msg: Message) {
+    if (msg.talker().id === botConfig.adminId) {
+        if (msg.text() === "config") {
             msg.talker().say(`isGame: ${config.isGame}\nisAutoChat: ${config.isAutoChat}`)
-        }
-        if(msg.text() === "game"){
+        }else if (msg.text() === "game") {
             config.isGame = !config.isGame
             msg.talker().say(`配置成功 ==> isGame: ${config.isGame}`)
-        }
-        if(msg.text() === "chat"){
+        }else if (msg.text() === "chat") {
             config.isAutoChat = !config.isAutoChat
             msg.talker().say(`配置成功 ==> isAutoChat: ${config.isAutoChat}`)
         }
+        bot.Room.find("大家一起喝橙汁").then(
+            (room) => {
+                room!.say("游戏开始，正在给大家私发卡牌")
+            }
+        )
     }
 }
 
 function autoChat(isAutoChat: boolean, msg: Message) {
-    if (!isAutoChat || msg.talker().id === botConfig.adminId) {
+    if (!isAutoChat || msg.talker().id === botConfig.adminId || msg.talker().id === "wxid_a5x323bdh6pq22") {
         return
     }
     if (!msg.room() && !msg.self() && msg.talker().type() === ContactType.Individual) {
@@ -53,4 +57,17 @@ function autoChat(isAutoChat: boolean, msg: Message) {
             }
         );
     }
+}
+
+async function WhoIsTreater(isGame: boolean, msg: Message) {
+    if (!isGame || !msg.room()) {
+        return
+    }
+    let room: Room = msg.room()!
+    let topic: string = await room!.topic()
+    if (topic != "大家一起喝橙汁") {
+        return
+    }
+    log.info(botConfig.BotName, `received <======  Room: ${topic} ---- Contact: ${msg.talker()} ---- Text: ${msg.text()}`)
+    await start(msg)
 }

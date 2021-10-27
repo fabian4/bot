@@ -4,19 +4,8 @@ import {Status, treaterGame} from "./pojo";
 
 const gameInfo: Map<string, treaterGame> = new Map
 
-export default async function WhoIsTreater(isGame: boolean, msg: Message) {
-    if (!isGame || !msg.room()) {
-        return
-    }
-    let room: Room = msg.room()!
-    let topic: string = await room.topic()
-
-    if (topic != "大家一起喝橙汁") {
-        return;
-    }
-    log.info(botConfig.BotName, `received <======  Room: ${topic} ---- Contact: ${msg.talker()!.name()} ---- Text: ${msg.text()}`)
-
-
+export default async function start(msg: Message) {
+    let room: Room = msg.room()
     let game: treaterGame = await getGame(room) || Object.create(null)
     switch (game.status) {
         case Status.START:
@@ -24,8 +13,8 @@ export default async function WhoIsTreater(isGame: boolean, msg: Message) {
             initCard(game);
             break;
         case Status.SAYING:
-            log.info(botConfig.BotName, "玩家发言阶段：等待玩家发言")
-
+            log.info(botConfig.BotName, `接收到玩家[${msg.talker()}]的发言：${msg.text()}`)
+            record(msg)
     }
 }
 
@@ -41,7 +30,6 @@ async function getGame(room: Room): Promise<treaterGame | undefined> {
 }
 
 function initCard(game: treaterGame) {
-    game.room.say("游戏开始 正在为大家分发卡牌")
     let contacts: Contact[] = game.contacts
     game.treaterId = contacts[parseInt(String(Math.random() * contacts.length))].id
     for (let i = 0; i < contacts.length; i++) {
@@ -58,4 +46,8 @@ function initCard(game: treaterGame) {
         )
     }
     game.status = Status.SAYING
+}
+
+function record(msg: Message){
+
 }
