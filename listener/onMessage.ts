@@ -2,7 +2,6 @@ import {log, Message, Room} from "wechaty";
 import {client} from "../util/TencentChat";
 import {ContactType} from "wechaty-puppet";
 import botConfig from "../config";
-import {bot} from "../index";
 import start from "../game/WhoIsTreater";
 
 const config = {
@@ -11,6 +10,10 @@ const config = {
 }
 
 export default async function onMessage(msg: Message) {
+    // 过滤表情包
+    if (msg.text().length > 50) {
+        return
+    }
 
     // admin控制
     changeConfig(msg)
@@ -33,17 +36,6 @@ function changeConfig(msg: Message) {
             config.isAutoChat = !config.isAutoChat
             msg.talker().say(`配置成功 ==> isAutoChat: ${config.isAutoChat}`)
         }
-        bot.Room.find("大家一起喝橙汁").then(
-            (room) => {
-                room!.memberAll().then(
-                    (contacts) => {
-                        for (let i = 0; i < contacts.length; i++) {
-                            console.log(contacts[i].toString().slice(8, -1))
-                        }
-                    }
-                )
-            }
-        )
     }
 }
 
@@ -74,6 +66,6 @@ async function WhoIsTreater(isGame: boolean, msg: Message) {
     if (topic != "大家一起喝橙汁") {
         return
     }
-    log.info(botConfig.BotName, `received <======  Room: ${topic} ---- Contact: ${msg.talker()} ---- Text: ${msg.text()}`)
+    log.info(botConfig.BotName, `received <======  Room: ${topic} ---- Contact: ${msg.talker().toString().slice(8, -1)} ---- Text: ${msg.text()}`)
     await start(msg)
 }
