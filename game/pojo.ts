@@ -12,7 +12,6 @@ export class treaterGame {
     public roomId: string
     public status: Status
     public players: Contact[]
-    public contacts: Contact[]
 
     public normal: string
     public treater: string
@@ -28,11 +27,6 @@ export class treaterGame {
         this.roomId = room.id
         this.status = Status.START
         this.players = contacts.filter(
-            (contact) => {
-                return !contact.self()
-            }
-        );
-        this.contacts = contacts.filter(
             (contact) => {
                 return !contact.self()
             }

@@ -7,11 +7,12 @@ const gameInfo: Map<string, treaterGame> = new Map
 export default async function start(msg: Message) {
     let room: Room = msg.room()!
     if (msg.text() === botConfig.START_KETWORD && msg.talker().self()) {
+        let contacts: Contact[] = await room.memberAll()
         if (!gameInfo.has(room.id)) {
-            let contacts: Contact[] = await room.memberAll()
             gameInfo.set(room.id, new treaterGame(room, contacts));
         } else if (gameInfo.get(room.id)?.status === Status.END) {
             gameInfo.get(room.id)!.status = Status.START
+            gameInfo.get(room.id)!.players = contacts
         }
     }
     if (!gameInfo.has(room.id)) {
@@ -70,7 +71,7 @@ function record(msg: Message, game: treaterGame) {
         }
     )
     game.room.say(comment)
-    if (game.saying.size === game.contacts.length) {
+    if (game.saying.size === game.players.length) {
         game.status = Status.VOTING
         let msg = "发言结束 下面开始投票环节\n------------------"
         for (let i = 0; i < game.players.length; i++) {
