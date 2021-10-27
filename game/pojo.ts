@@ -6,27 +6,29 @@ const cards: string[][] = [
 ]
 
 export class treaterGame {
-    public roomId: string;
-    public status: Status;
-    public contacts: Contact[];
+    public room: Room
+    public roomId: string
+    public status: Status
+    public contacts: Contact[]
 
-    public normal: string;
-    public treater: string;
-    public treaterId: string;
+    public normal: string
+    public treater: string
+    public treaterId: string
 
     public saying: Map<string, string>
     public voting: Map<string, number>
 
     constructor(room: Room, contacts: Contact[]) {
-        this.roomId = room.id;
-        this.status = Status.START;
+        this.room = room
+        this.roomId = room.id
+        this.status = Status.START
         this.contacts = contacts.filter(
             (contact) => {
                 return !contact.self()
             }
         );
 
-        let card: string[] = cards[Math.random() * cards.length]
+        let card: string[] = cards[parseInt(String(Math.random() * cards.length))]
         this.normal = card[0]
         this.treater = card[1]
 

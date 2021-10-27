@@ -17,11 +17,15 @@ export default async function WhoIsTreater(isGame: boolean, msg: Message) {
     log.info(botConfig.BotName, `received <======  Room: ${topic} ---- Contact: ${msg.talker()!.name()} ---- Text: ${msg.text()}`)
 
 
-    let game: treaterGame = await getGame(room) || undefined
-    switch (game.status){
+    let game: treaterGame = await getGame(room) || Object.create(null)
+    switch (game.status) {
         case Status.START:
+            log.info(botConfig.BotName, "游戏准备阶段：开始初始化分发卡牌")
             initCard(game);
             break;
+        case Status.SAYING:
+            log.info(botConfig.BotName, "玩家发言阶段：等待玩家发言")
+
     }
 }
 
@@ -36,9 +40,22 @@ async function getGame(room: Room): Promise<treaterGame | undefined> {
     }
 }
 
-function initCard(game: treaterGame){
-    console.log(game)
-    // for (let i = 0; i < game.contacts.length; i++) {
-    //
-    // }
+function initCard(game: treaterGame) {
+    game.room.say("游戏开始 正在为大家分发卡牌")
+    let contacts: Contact[] = game.contacts
+    game.treaterId = contacts[parseInt(String(Math.random() * contacts.length))].id
+    for (let i = 0; i < contacts.length; i++) {
+        let word: string = ""
+        if (contacts[i].id === game.treaterId) {
+            word = game.treater
+        } else {
+            word = game.normal
+        }
+        contacts[i].say("当前您拿到的名词是：" + word).then(
+            () => {
+                log.info(botConfig.BotName, `向玩家[${contacts[i]}]发送名词：${word}`)
+            }
+        )
+    }
+    game.status = Status.SAYING
 }
