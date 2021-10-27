@@ -9,19 +9,27 @@ export class treaterGame {
     public room: Room
     public roomId: string
     public status: Status
+    public players: Contact[]
     public contacts: Contact[]
 
     public normal: string
     public treater: string
-    public treaterId: string
+    public treaterPlayer: Contact
+
+    public voter: number
 
     public saying: Map<string, string>
-    public voting: Map<string, number>
+    public voting: Map<Contact, number>
 
     constructor(room: Room, contacts: Contact[]) {
         this.room = room
         this.roomId = room.id
         this.status = Status.START
+        this.players = contacts.filter(
+            (contact) => {
+                return !contact.self()
+            }
+        );
         this.contacts = contacts.filter(
             (contact) => {
                 return !contact.self()
@@ -32,9 +40,10 @@ export class treaterGame {
         this.normal = card[0]
         this.treater = card[1]
 
-        this.treaterId = ""
+        this.voter = 0
+        this.treaterPlayer = Object.create(null)
         this.saying = new Map<string, string>()
-        this.voting = new Map<string, number>()
+        this.voting = new Map<Contact, number>()
     }
 
 }

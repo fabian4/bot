@@ -6,7 +6,7 @@ import start from "../game/WhoIsTreater";
 
 const config = {
     isGame: true,
-    isAutoChat: true
+    isAutoChat: false
 }
 
 export default async function onMessage(msg: Message) {
@@ -63,9 +63,6 @@ async function WhoIsTreater(isGame: boolean, msg: Message) {
     }
     let room: Room = msg.room()!
     let topic: string = await room!.topic()
-    if (topic != "大家一起喝橙汁") {
-        return
-    }
     log.info(botConfig.BotName, `received <======  Room: ${topic} ---- Contact: ${msg.talker().toString().slice(8, -1)} ---- Text: ${msg.text()}`)
     await start(msg)
 }
