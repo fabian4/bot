@@ -40,10 +40,12 @@ export class treaterGame {
 }
 
 export enum Status {
-    // 初始化类、分发卡牌
+    // 开始
     START,
     // 发言环节
     SAYING,
     // 投票环节
-    VOTING
+    VOTING,
+    // 结束
+    END
 }

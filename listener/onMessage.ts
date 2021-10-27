@@ -26,16 +26,22 @@ function changeConfig(msg: Message) {
     if (msg.talker().id === botConfig.adminId) {
         if (msg.text() === "config") {
             msg.talker().say(`isGame: ${config.isGame}\nisAutoChat: ${config.isAutoChat}`)
-        }else if (msg.text() === "game") {
+        } else if (msg.text() === "game") {
             config.isGame = !config.isGame
             msg.talker().say(`配置成功 ==> isGame: ${config.isGame}`)
-        }else if (msg.text() === "chat") {
+        } else if (msg.text() === "chat") {
             config.isAutoChat = !config.isAutoChat
             msg.talker().say(`配置成功 ==> isAutoChat: ${config.isAutoChat}`)
         }
         bot.Room.find("大家一起喝橙汁").then(
             (room) => {
-                room!.say("游戏开始，正在给大家私发卡牌")
+                room!.memberAll().then(
+                    (contacts) => {
+                        for (let i = 0; i < contacts.length; i++) {
+                            console.log(contacts[i].toString().slice(8, -1))
+                        }
+                    }
+                )
             }
         )
     }
