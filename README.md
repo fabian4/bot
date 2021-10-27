@@ -48,7 +48,9 @@ export const botConfig = {
 }
 ~~~
 ## 五、启动和运行
-1. `git clone git@github.com:fabian4/ChatBot.git`
-2. `cd ./ChatBot`
-3. `npm install`
-4. `npm run start`
+~~~bash
+1. git clone git@github.com:fabian4/ChatBot.git
+2. cd ./ChatBot
+3. npm install
+4. npm run start
+~~~
