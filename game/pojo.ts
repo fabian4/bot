@@ -2,7 +2,9 @@ import {Contact, Room} from "wechaty";
 
 const cards: string[][] = [
     ["可口可乐", "百事可乐"],
-    ["茶百道", "七分甜"]
+    ["AD钙", "旺仔牛奶"],
+    ["口香糖", "薄荷糖"],
+    ["小番茄", "圣女果"]
 ]
 
 export class treaterGame {

@@ -40,7 +40,7 @@ function changeConfig(msg: Message) {
 }
 
 function autoChat(isAutoChat: boolean, msg: Message) {
-    if (!isAutoChat || msg.talker().id === botConfig.adminId || msg.talker().id === "wxid_a5x323bdh6pq22") {
+    if (!isAutoChat || msg.talker().id === botConfig.adminId) {
         return
     }
     if (!msg.room() && !msg.self() && msg.talker().type() === ContactType.Individual) {
