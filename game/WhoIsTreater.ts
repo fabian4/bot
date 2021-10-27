@@ -1,6 +1,6 @@
 import {Contact, log, Message, Room} from "wechaty";
 import botConfig from "../config";
-import {Status, treaterGame} from "./pojo";
+import {Status, treaterGame} from "./class";
 
 const gameInfo: Map<string, treaterGame> = new Map
 
