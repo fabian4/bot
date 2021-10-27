@@ -2,7 +2,7 @@ import {log, Message, Room} from "wechaty";
 import {client} from "../util/TencentChat";
 import {ContactType} from "wechaty-puppet";
 import botConfig from "../config";
-import {bot} from "../main";
+import {bot} from "../index";
 import start from "../game/WhoIsTreater";
 
 const config = {

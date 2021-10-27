@@ -4,7 +4,7 @@
   "description": "a chatbot based on wechaty",
   "main": "index.js",
   "scripts": {
-    "start": "node --loader=ts-node/esm main.ts"
+    "start": "node --loader=ts-node/esm index.ts"
   },
   "author": "fabian",
   "license": "Apache-2.0",

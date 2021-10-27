@@ -55,11 +55,11 @@ function initCard(game: treaterGame) {
 }
 
 function record(msg: Message, game: treaterGame) {
-    if (msg.text().length >= 20) {
+    if (msg.text().length >= 20 || msg.talker().self()) {
         return
     }
     let speaker: Contact = msg.talker()
-    if (!game.saying.has(speaker.toString().slice(8, -1)) && !speaker.self()) {
+    if (!game.saying.has(speaker.toString().slice(8, -1))) {
         game.saying.set(speaker.toString().slice(8, -1), msg.text())
     }
     let comment: string = "当前的发言总结为："
