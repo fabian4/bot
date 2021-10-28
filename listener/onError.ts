@@ -1,7 +1,6 @@
-import { log } from 'wechaty';
-// @ts-ignore
-import botConfig from '../config.ts';
+import { log } from 'wechaty'
+import botConfig from '../config'
 
-export default async function onError(error: Error) {
-  log.error(botConfig.BotName, 'on error: ', error.stack);
+export default async function onError (error: Error) {
+  log.error(botConfig.BotName, 'on error: ', error.stack)
 }
