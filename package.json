@@ -9,13 +9,17 @@
   "author": "fabian",
   "license": "Apache-2.0",
   "dependencies": {
-    "eslint": "^8.1.0",
     "qrcode-terminal": "^0.12.0",
     "tencentcloud-sdk-nodejs": "^4.0.220",
     "wechaty": "^0.68.1",
     "wechaty-puppet-padlocal": "^0.4.2"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.25.2",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
   }
