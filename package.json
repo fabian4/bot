@@ -1,5 +1,5 @@
 {
-  "name": "chatbot",
+  "name": "bot",
   "version": "1.0.0",
   "description": "a chatbot based on wechaty",
   "main": "index.js",
